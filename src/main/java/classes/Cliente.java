@@ -3,10 +3,7 @@ package classes;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import org.springframework.web.bind.annotation.RequestBody;
-
 import lombok.Data;
-import lombok.Setter;
 import lombok.ToString;
 
 @Data
@@ -21,6 +18,22 @@ public class Cliente {
     private String email;
     private String dataNascimento;
 
+    public void setCpf(String cpf) {
+        if (cpf.length() == 11) {
+            this.cpf = cpf;
+        } else {
+            throw new IllegalArgumentException("CPF deve conter exatamente 11 dígitos.");
+        }
+    }
+
+    public void setTelefone(String telefone) {
+        if (telefone.length() == 8 || telefone.length() == 9) {
+            this.telefone = telefone;
+        } else {
+            throw new IllegalArgumentException("Telefone deve conter 8/9 dígitos.");
+        }
+    }
+
     public static void addCliente() {
         Cliente cliente = new Cliente();
         Scanner sc = new Scanner(System.in);
@@ -28,10 +41,10 @@ public class Cliente {
         System.out.println("Digite o nome: ");
         cliente.setNome(sc.nextLine());
 
-        System.out.println("Digite seu CPF:");
+        System.out.println("Digite seu CPF: (11 caracteres)");
         cliente.setCpf(sc.nextLine());
 
-        System.out.println("Digite seu telefone: ");
+        System.out.println("Digite seu telefone: *Obs: sem o DDD");
         cliente.setTelefone(sc.nextLine());
 
         cliente.setEndereco(Endereco.perguntaEndereco());
@@ -42,4 +55,5 @@ public class Cliente {
 
         sc.close(); // Fechar o scanner após o uso
     }
+
 }

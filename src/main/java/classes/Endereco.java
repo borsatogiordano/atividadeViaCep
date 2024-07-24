@@ -18,6 +18,7 @@ public class Endereco {
     private String localidade;
     private String uf;
     private String complemento;
+    private int numero;
 
     public static Endereco getEnderecoByCep(String cep) {
 
@@ -54,8 +55,6 @@ public class Endereco {
         String cep = sc.nextLine();
 
         Endereco endereco = Endereco.getEnderecoByCep(cep);
-        System.out.println("Digite o complemento: ");
-        endereco.setComplemento(sc.nextLine());
 
         System.out.println("Endereço encontrado: ");
         System.out.println("CEP: " + cep);
@@ -63,16 +62,20 @@ public class Endereco {
         System.out.println("Bairro: " + endereco.getBairro());
         System.out.println("Cidade: " + endereco.getLocalidade());
         System.out.println("Estado: " + endereco.getUf());
-        System.out.println("Complemento: " + endereco.getComplemento());
 
         System.out.println("Confirma? S/N");
         String resposta = sc.nextLine();
 
         if (resposta.equalsIgnoreCase("n")) {
             perguntaEndereco();
+        } else {
+            System.out.println("Digite o complemento: ");
+            endereco.setComplemento(sc.nextLine());
+
+            System.out.println("Digite o numero: ");
+            endereco.setNumero(sc.nextInt());
         }
-        
+        sc.close();
         return endereco;
     }
-
 }
