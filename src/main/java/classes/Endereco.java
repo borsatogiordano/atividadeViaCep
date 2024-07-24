@@ -47,13 +47,15 @@ public class Endereco {
         return endereco;
     }
 
-    public static void perguntaEndereco() {
+    public static Endereco perguntaEndereco() {
 
         System.out.println("Digite o CEP: ");
         Scanner sc = new Scanner(System.in);
         String cep = sc.nextLine();
 
         Endereco endereco = Endereco.getEnderecoByCep(cep);
+        System.out.println("Digite o complemento: ");
+        endereco.setComplemento(sc.nextLine());
 
         System.out.println("Endereço encontrado: ");
         System.out.println("CEP: " + cep);
@@ -61,8 +63,16 @@ public class Endereco {
         System.out.println("Bairro: " + endereco.getBairro());
         System.out.println("Cidade: " + endereco.getLocalidade());
         System.out.println("Estado: " + endereco.getUf());
-        // System.out.println("Complemento: " + endereco.getComplemento());
+        System.out.println("Complemento: " + endereco.getComplemento());
 
+        System.out.println("Confirma? S/N");
+        String resposta = sc.nextLine();
+
+        if (resposta.equalsIgnoreCase("n")) {
+            perguntaEndereco();
+        }
+        
+        return endereco;
     }
 
 }
